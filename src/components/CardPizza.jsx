@@ -31,4 +31,5 @@ function CardPizza(props) {
   );
 }
 
+export default CardPizza;
 

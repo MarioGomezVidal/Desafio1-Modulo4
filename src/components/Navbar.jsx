@@ -3,13 +3,13 @@ import { Navbar, Nav, Button, Container } from 'react-bootstrap';
 
 function NavBar() {
   const total = 25000;
-  const token = false; // Simula si está logueado o no
+  const token = false;
   const formattedTotal = total.toLocaleString();
 
   return (
     <Navbar bg="light" expand="lg" className="mb-4 shadow-sm">
       <Container>
-        <Navbar.Brand href="#">Pizzería MammaMia!</Navbar.Brand>
+        <Navbar.Brand >Pizzería MammaMia!</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -32,3 +32,5 @@ function NavBar() {
     </Navbar>
   );
 }
+
+export default Navbar;
