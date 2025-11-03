@@ -1,19 +1,23 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import NavBar from './components/NavBar'
+import Footer from './components/Footer'
+import Home from './components/Home'
+import RegisterPage from './components/Form/RegisterPage'
+import LoginPage from './components/Form/LoginPage'
 
-import NavBar from './components/NavBar';
-import Home from './components/Home';
-import Footer from './components/Footer';
-
-function App() {
+const App = () => {
   return (
-    <>
+    <div>
       <NavBar />
-      <Home />
+      {/* <Home /> */}
+      {/* <RegisterPage /> */}
+      <LoginPage />
       <Footer />
-    </>
-  );
+    </div>
+  )
 }
 
-export default App;
+export default App
+
 
