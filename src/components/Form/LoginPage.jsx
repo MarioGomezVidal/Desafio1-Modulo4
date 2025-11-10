@@ -18,7 +18,7 @@ function LoginPage() {
       return
     }
 
-    alert('✅ Inicio de sesión exitoso.')
+    alert('Inicio de sesión exitoso.')
   }
 
   return (

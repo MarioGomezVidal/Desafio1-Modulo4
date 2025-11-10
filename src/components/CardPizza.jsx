@@ -1,35 +1,43 @@
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
+import React from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
-function CardPizza(props) {
+function CardPizza({ name, price, img, desc, ingredients }) {
   return (
-    <Card style={{ width: '100%', transition: 'transform 0.3s', cursor: 'pointer' }}
-          className="shadow-sm"
-          onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'}
-          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+    <Card
+      className="shadow-sm m-2"
+      style={{ width: "20rem", borderRadius: "15px" }}
     >
-      <Card.Img variant="top" style={{height: "230px", objectFit:"cover"}} src={props.imagen}/>
+      <Card.Img
+        variant="top"
+        src={img}
+        alt={name}
+        style={{
+          height: "200px",
+          objectFit: "cover",
+          borderTopLeftRadius: "15px",
+          borderTopRightRadius: "15px",
+        }}
+      />
       <Card.Body>
-        <Card.Title>{props.titulo}</Card.Title>
-        <Card.Text className='text-secondary'>{props.desc}</Card.Text>
-        <Card.Text className='text-secondary'>{props.loc}</Card.Text>
+        <Card.Title className="text-capitalize">{name.toUpperCase()}</Card.Title>
+        <Card.Text>{desc}</Card.Text>
+        <h6>Ingredientes:</h6>
+        <ul>
+          {ingredients.map((ingrediente, i) => (
+            <li key={i}>{ingrediente}</li>
+          ))}
+        </ul>
+        <h5 className="text-success">${price}</h5>
         <div className="d-flex justify-content-between mt-3">
-          <Button variant="primary">Ver más</Button>
+          <Button variant="outline-primary">Ver más</Button>
           <Button variant="success">Añadir</Button>
         </div>
       </Card.Body>
-      <ListGroup className="list-group-flush">
-        <ListGroup.Item>
-          <div className='precio'>
-            <span style={{ textDecoration: 'line-through', color: 'gray' }}>${props.precio1}</span>{' '}
-            <span className='text-success h5'>${props.precio2}</span>
-          </div>
-        </ListGroup.Item>
-      </ListGroup>
     </Card>
   );
 }
 
 export default CardPizza;
+
 
