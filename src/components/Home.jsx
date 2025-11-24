@@ -1,27 +1,57 @@
-import React, { useState } from "react";
-import { pizzas } from "../components/pizzas";
-import CardPizza from "./CardPizza";
+import React, { useEffect, useState } from "react";
 
-function Home() {
-  const [listaPizzas] = useState(pizzas);
+export default function Home() {
+  const apiurl = "http://localhost:5000/api/pizzas";
+  const [pizzas, setPizzas] = useState([]);
+  const [token, setToken] = useState(false);
+
+  const getPizzas = async () => {
+    try {
+      const res = await fetch(apiurl);
+      const data = await res.json();
+      setPizzas(data);
+    } catch (error) {
+      console.log("Error al obtener las pizzas:", error);
+    }
+  };
+
+  const cerrarSesion = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    getPizzas();
+    setToken(localStorage.getItem("token"));
+  }, []);
 
   return (
-    <main className="container mt-4">
-      <h2 className="text-center mb-4">🍕 Nuestras Pizzas</h2>
-      <div className="d-flex flex-wrap justify-content-center">
-        {listaPizzas.map((pizza) => (
-          <CardPizza
-            key={pizza.id}
-            name={pizza.name}
-            price={pizza.price}
-            img={pizza.img}
-            desc={pizza.desc}
-            ingredients={pizza.ingredients}
-          />
-        ))}
-      </div>
-    </main>
+    <div>
+      {token ? (
+        <>
+          <h1>Lista de Pizzas</h1>
+
+          {pizzas.length === 0 ? (
+            <p>Cargando pizzas...</p>
+          ) : (
+            pizzas.map((p) => (
+              <div key={p.id} className="pizza-card">
+                <h3>{p.name}</h3>
+                <img src={p.img} alt={p.name} width="200" />
+                <p>Precio: ${p.price}</p>
+                <p>Ingredientes: {p.ingredients.join(", ")}</p>
+              </div>
+            ))
+          )}
+
+          <button onClick={cerrarSesion}>Cerrar Sesión</button>
+        </>
+      ) : (
+        <>
+          <p>Necesitas iniciar sesión para ver las pizzas</p>
+        </>
+      )}
+    </div>
   );
 }
 
-export default Home;
